@@ -4,22 +4,84 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/style.css">
 
-  <title>JARED'S Weather API Example</title>
+  <title>JARED'S Weather API</title>
 </head>
 <body>
-  <h1>Weather Dashboard</h1>
-  
-  <div class="weather-container">
-    <h2>Today's Weather</h2>
-    <p id="location"></p>
-    <p id="temperature"></p>
-    <p id="description"></p>
-    <p id="humidity"></p>
-    <p id="windspeed"></p>
-  </div>
 
-  
+<div class="weathercontainer">
+      <div class="todaysinfo">
+
+        <div class="dateinfo">
+          <div class="time" id="time">
+            12:30 <span id="am-pm">PM</span>
+          </div>
+            <div class="date" id="date">Monday, 19 June</div>
+              <div class="current" id="currentweather">
+              <div class="weatheritem">
+                <div>Temperature</div>
+                <div>98.6&#176; C</div>
+            </div>
+            <div class="weatheritem">
+              <div>Description</div>
+              <div>Sunny</div>
+          </div>
+          <div class="weatheritem">
+            <div>Humidity</div>
+            <div>98.0%</div>
+        </div>
+        <div class="weatheritem">
+          <div>Wind Speed</div>
+          <div>20mph</div>
+        </div>
+  </div>
+      </div>
+      
+    <div class="locationcontainer">
+      <div class="timezone" id="timezone">USA</div>
+      <div class="coordinates" id="coordinates">WHERE</div>
+    </div>
+      <div class="weather-forecast">
+        <div class="todaysforecast" id="currentforecast">
+          <img src="" alt="weather-icon" class="weathericon">
+            <div class="day">Monday</div>
+            <div class="temperature">Night - 25.6&#176; C</div>
+            <div class="temperature">Day - 35.6&#176; C</div>
+        </div>
+        <div class="weatherforecast" id="weatherforecast">
+          <div class="weatherforecastitems">
+            <div class="day">Tue</div>
+            <img src="" alt="weather-icon" class="weathericon">
+            <div class="temperature">Night - 25.6&#176; C</div>
+            <div class="temperature">Day - 35.6&#176; C</div>
+          </div>
+          <div class="weatherforecastitems">
+            <div class="day">Wed</div>
+            <img src="" alt="weather-icon" class="weathericon">
+            <div class="temperature">Night - 25.6&#176; C</div>
+            <div class="temperature">Day - 35.6&#176; C</div>
+          </div>
+          <div class="weatherforecastitems">
+            <div class="day">Thur</div>
+            <img src="" alt="weather-icon" class="weathericon">
+            <div class="temperature">Night - 25.6&#176; C</div>
+            <div class="temperature">Day - 35.6&#176; C</div>
+          </div>
+          <div class="weatherforecastitems">
+            <div class="day">Fri</div>
+            <img src="" alt="weather-icon" class="weathericon">
+            <div class="temperature">Night - 25.6&#176; C</div>
+            <div class="temperature">Day - 35.6&#176; C</div>
+          </div>
+          <div class="weatherforecastitems">
+            <div class="day">Sat</div>
+            <img src="" alt="weather-icon" class="weathericon">
+            <div class="temperature">Night - 25.6&#176; C</div>
+            <div class="temperature">Day - 35.6&#176; C</div>
+          </div>
+        </div>
+      </div>
+  <script src="./assets/style.js"></script>
 </body>
 </html>
