@@ -16,20 +16,21 @@ setInterval(() => {
     var date = time.getDate();
     var day = time.getDay();
     var hour = time.getHours();
+    var minutes = time.getMinutes();
     var hoursIn24HrFormat;
-if (hour >= 12 && hour < 24) {
-  hoursIn24HrFormat = hour;
-} else if (hour >= 0 && hour < 12) {
-  hoursIn24HrFormat = hour + 12;
-}
-console.log("hoursIn24HrFormat");
- var minutes = time.getMinutes();
     var ampm;
 if (hour >= 12) {
   ampm = "PM";
 } else {
   ampm = "AM";
 }
+
+if (hour >= 13 && hour < 23) {
+  hoursIn24HrFormat = hour - 12;
+} else if (hour >= 0 && hour < 11) {
+  hoursIn24HrFormat = hour;
+}
+console.log("hoursIn24HrFormat");
 
 timeEl.innerHTML = `${hoursIn24HrFormat}:${minutes} <span id="am-pm">${ampm}</span>`;
 
