@@ -1,3 +1,47 @@
+// Get references to HTML elements
+var submitButton = document.getElementById('submitButton');
+submitButton.addEventListener('click', function() {
+    var searchInput = document.getElementById('searchInput');
+    var city = searchInput.value;
+    fetchWeatherData(city);
+    function fetchWeatherData(city) {
+        var apiKey = 'e0948e49398ecf759c545ec952d5f846';
+        var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}`;
+      
+        fetch(apiUrl)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Unable to fetch weather data.');
+            }
+            return response.json();
+          })
+          .then(data => {
+            // Process the weather data
+            console.log('Weather data:', data);
+            console.log(data);
+            
+            // Example: Extract temperature and description
+            var temperature = data.main.temp;
+            var humidity = data.main.humidity;
+            var wind_speed = data.main.wind_speed;
+      
+            // Example: Display the temperature and description in the UI
+            var temperatureElement = document.getElementById('temperature');
+            var humidityElement = document.getElementById('humidity');
+            var wind_speed = document.getElementById('wind_speed');
+            temperatureElement.textContent = temperature;
+            humidityElement.textContent = humidity;
+            wind_speedElement.textContent = wind_speed;
+          })
+          .catch(error => {
+            console.log('Error fetching weather data:', error);
+          });
+      }
+
+
+
+
+
 var timeEl = document.getElementById("time");
 var dateEl = document.getElementById("date");
 var currentWeatherItemsEl = document.getElementById("current-weather-items");
@@ -40,28 +84,4 @@ dateEl.innerHTML = days[day] + ', ' + date + ' ' + months[month];
 
 }, 1000);
 
-getWeatherData();
-function getWeatherData() {
-    navigator.geolocation.getCurrentPosition((success) => {
-      let { latitude, longitude } = success.coords;
-  
-      var API_KEY = 'e0948e49398ecf759c545ec952d5f846';
-  
-      var url = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`;
-  
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          // Process the retrieved weather data
-          console.log(data);
-          showWeatherData(data);
-        })
-        .catch(error => {
-          // Handle any errors
-          console.log('Error:', error);
-        });
-    });
-  }
-  function showWeatherData(data){
-    let humidity, pressure
-  }
+});
