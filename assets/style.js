@@ -23,7 +23,7 @@ submitButton.addEventListener('click', function() {
             // Example: Extract temperature and description
             var temperature = data.main.temp;
             var humidity = data.main.humidity;
-            var wind_speed = data.main.wind_speed;
+            var wind_speed = data.wind.speed;
       
             // Example: Display the temperature and description in the UI
             var temperatureElement = document.getElementById('temperature');
@@ -85,3 +85,80 @@ dateEl.innerHTML = days[day] + ', ' + date + ' ' + months[month];
 }, 1000);
 
 });
+
+/*    function fetchWeatherData(city) {
+        var apiKey = 'e0948e49398ecf759c545ec952d5f846';
+        var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&appid=${apiKey}`;
+        var futureApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&units=metric&appid=${apiKey}`;
+      
+        var currentWeather = fetch(apiUrl).then(response => {
+            if (!response.ok) {
+              throw new Error('Unable to fetch weather data.');
+            }
+            return response.json();
+          });
+        var futureWeather = fetch(futureApiUrl).then(response =>{
+            if(!response.ok) {
+                throw new Error('Unable to fetch weather data.');
+            }
+            return response.json();
+        });
+
+    Promise.all([currentWeather, futureWeather]).then(dataArray => {
+        var currentWeatherData = dataArray[0];
+        var futureWeatherData = dataArray[1];
+            
+            // Example: Extract temperature,humidity, and windspeed
+            var temperature = data.main.temp;
+            var humidity = data.main.humidity;
+            var wind_speed = data.wind.speed;
+      
+            //Process info to display current weather
+            console.log('Current weather data:', currentWeatherData);
+            var temperatureElement = document.getElementById('temperature');
+            var humidityElement = document.getElementById('humidity');
+            var wind_speedElement = document.getElementById('wind_speed');
+            temperatureElement.textContent = temperature;
+            humidityElement.textContent = humidity;
+            wind_speedElement.textContent = wind_speed;
+
+            //Process info to display for future forecast
+            console.log('Future weather data:', futureWeatherData);
+            var futureForecastElement = document.getElementById("future-forecast")
+            futureForecastElement.innerHTML = '';
+
+            for(var i = 0; i<futureWeatherData.list.length; i += 8){
+                var forecastData = futureWeatherData.list[i];
+                var forecastFutureDate = new Date(forecastData.dt *1000);
+                var forecastTemperature = forecastData.main.temp;
+                var forecastHumidity = forecastData.main.humidity;
+                var forecastWindSpeed = forecastData.main.wind.speed;
+
+            var forecastFutureItemElement = document.createElement("div");
+            forecastFutureItemElement.classList.add("forecast-item");
+
+            var dateElement = document.createElement("div");
+            dateElement.textContent = forecastFutureDate.toLocaleDateString('en-US', { weekday: 'short' });
+
+            var temperatureElement = document.createElement("div");
+            temperatureElement.textContent = forecastTemperature + '°C';
+
+            var humidityElement = document.createElement("div");
+            humidityElement.textContent = forecastHumidity + '%';
+
+            var windSpeedElement = document.createElement("div");
+            windSpeedElement.textContent = forecastWindSpeed + "mph";
+
+            forecastFutureItemElement.appendChild(dateElement);
+            forecastFutureItemElement.appendChild(temperatureElement);
+            forecastFutureItemElement.appendChild(humidityElement);
+            forecastFutureItemElement.appendChild(windSpeedElement);
+
+            futureForecastElement.appendChild(forecastFutureItemElement);
+
+            }
+        })
+          .catch(error => {
+            console.log('Error fetching weather data:', error);
+          });
+      }
