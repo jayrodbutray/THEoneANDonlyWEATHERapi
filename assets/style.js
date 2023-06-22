@@ -17,7 +17,7 @@ setInterval(() => {
     var day = time.getDay();
     var hour = time.getHours();
     var minutes = time.getMinutes();
-    var hoursIn24HrFormat;
+    var hoursIn12HrFormat;
     var ampm;
 if (hour >= 12) {
   ampm = "PM";
@@ -25,32 +25,36 @@ if (hour >= 12) {
   ampm = "AM";
 }
 
-if (hour >= 13 && hour < 23) {
-  hoursIn24HrFormat = hour - 12;
-} else if (hour >= 0 && hour < 11) {
-  hoursIn24HrFormat = hour;
+if (hour >= 13 && hour <= 23) {
+  hoursIn12HrFormat = hour - 12;
+} else if (hour === 0){
+  hoursIn12HrFormat = 12;
+} else{
+    hoursIn12HrFormat = hour;
 }
-console.log("hoursIn24HrFormat");
+console.log("hoursIn12HrFormat");
 
-timeEl.innerHTML = `${hoursIn24HrFormat}:${minutes} <span id="am-pm">${ampm}</span>`;
+timeEl.innerHTML = `${hoursIn12HrFormat}:${minutes} <span id="am-pm">${ampm}</span>`;
 
 dateEl.innerHTML = days[day] + ', ' + date + ' ' + months[month];
 
 }, 1000);
 
+getWeatherData();
 function getWeatherData() {
     navigator.geolocation.getCurrentPosition((success) => {
       let { latitude, longitude } = success.coords;
   
       var API_KEY = 'e0948e49398ecf759c545ec952d5f846';
   
-      var url = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&appid=${API_KEY}`;
+      var url = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`;
   
       fetch(url)
         .then(response => response.json())
         .then(data => {
           // Process the retrieved weather data
           console.log(data);
+          showWeatherData(data);
         })
         .catch(error => {
           // Handle any errors
@@ -58,6 +62,6 @@ function getWeatherData() {
         });
     });
   }
-  
-  getWeatherData();
-  
+  function showWeatherData(data){
+    let humidity, pressure
+  }
