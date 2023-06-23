@@ -3,7 +3,7 @@ var submitButton = document.getElementById('submitButton');
 submitButton.addEventListener('click', function() {
     var searchInput = document.getElementById('searchInput');
     var city = searchInput.value;
-    fetchWeatherData(city);
+    fetchWeatherDataCombined(city);
     function fetchWeatherData(city) {
         var apiKey = 'e0948e49398ecf759c545ec952d5f846';
         var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}`;
@@ -37,8 +37,7 @@ submitButton.addEventListener('click', function() {
             console.log('Error fetching weather data:', error);
           });
       }
-
-
+});
 
 
 
@@ -84,9 +83,8 @@ dateEl.innerHTML = days[day] + ', ' + date + ' ' + months[month];
 
 }, 1000);
 
-});
 
-/*    function fetchWeatherData(city) {
+ function fetchWeatherDataCombined(city) {
         var apiKey = 'e0948e49398ecf759c545ec952d5f846';
         var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&appid=${apiKey}`;
         var futureApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&units=metric&appid=${apiKey}`;
@@ -109,9 +107,9 @@ dateEl.innerHTML = days[day] + ', ' + date + ' ' + months[month];
         var futureWeatherData = dataArray[1];
             
             // Example: Extract temperature,humidity, and windspeed
-            var temperature = data.main.temp;
-            var humidity = data.main.humidity;
-            var wind_speed = data.wind.speed;
+            var temperature = currentWeatherData.main.temp;
+            var humidity = currentWeatherData.main.humidity;
+            var wind_speed = currentWeatherData.wind.speed;
       
             //Process info to display current weather
             console.log('Current weather data:', currentWeatherData);
@@ -124,7 +122,7 @@ dateEl.innerHTML = days[day] + ', ' + date + ' ' + months[month];
 
             //Process info to display for future forecast
             console.log('Future weather data:', futureWeatherData);
-            var futureForecastElement = document.getElementById("future-forecast")
+            var futureForecastElement = document.querySelector(".future-forecast")
             futureForecastElement.innerHTML = '';
 
             for(var i = 0; i<futureWeatherData.list.length; i += 8){
@@ -132,7 +130,7 @@ dateEl.innerHTML = days[day] + ', ' + date + ' ' + months[month];
                 var forecastFutureDate = new Date(forecastData.dt *1000);
                 var forecastTemperature = forecastData.main.temp;
                 var forecastHumidity = forecastData.main.humidity;
-                var forecastWindSpeed = forecastData.main.wind.speed;
+                var forecastWindSpeed = forecastData.wind.speed;
 
             var forecastFutureItemElement = document.createElement("div");
             forecastFutureItemElement.classList.add("forecast-item");
@@ -149,6 +147,9 @@ dateEl.innerHTML = days[day] + ', ' + date + ' ' + months[month];
             var windSpeedElement = document.createElement("div");
             windSpeedElement.textContent = forecastWindSpeed + "mph";
 
+            //var imageIcon = document.createElement("img");
+            //imageIcon.setAttribute("src", add i variable with url sent my Michael)
+
             forecastFutureItemElement.appendChild(dateElement);
             forecastFutureItemElement.appendChild(temperatureElement);
             forecastFutureItemElement.appendChild(humidityElement);
@@ -159,6 +160,6 @@ dateEl.innerHTML = days[day] + ', ' + date + ' ' + months[month];
             }
         })
           .catch(error => {
-            console.log('Error fetching weather data:', error);
+            console.error('Error fetching weather data:', error);
           });
-        */ 
+        }
