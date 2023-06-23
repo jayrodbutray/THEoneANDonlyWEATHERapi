@@ -3,6 +3,15 @@ var submitButton = document.getElementById('submitButton');
 submitButton.addEventListener('click', function () {
   var searchInput = document.getElementById('searchInput');
   var city = searchInput.value;
+
+
+var cityElement = document.createElement("div");
+cityElement.textContent = "Searched City: " + city;
+
+var container = document.getElementById("timezone"); 
+
+container.appendChild(cityElement);
+
   fetchWeatherDataCombined(city);
   function fetchWeatherData(city) {
     var apiKey = 'e0948e49398ecf759c545ec952d5f846';
