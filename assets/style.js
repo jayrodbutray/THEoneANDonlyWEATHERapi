@@ -29,14 +29,14 @@ submitButton.addEventListener('click', function () {
     // Loop through the search history array and create list items for each city
     for (var i = 0; i < searchHistory.length; i++) {
       var city = searchHistory[i];
-      var cityItem = document.createElement('li');
-      cityItem.textContent = city;
-      cityItem.classList.add('city-item');
+      var cityButton = document.createElement('button');
+      cityButton.textContent = city;
+      cityButton.classList.add('city-button');
 
-      cityItem.addEventListener('click', function (){
+      cityButton.addEventListener('click', function (){
         retrieveForecast(this.textContent);
       });
-      searchHistoryElement.appendChild(cityItem);
+      searchHistoryElement.appendChild(cityButton);
     }
   }
 
