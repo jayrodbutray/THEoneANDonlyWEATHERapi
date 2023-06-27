@@ -78,7 +78,7 @@ setInterval(() => {
   var date = time.getDate();
   var day = time.getDay();
   var hour = time.getHours();
-  var minutes = time.getMinutes();
+  var minutes = time.getMinutes().toString().padStart(2, '0');
   var hoursIn12HrFormat;
   var ampm;
   if (hour >= 12) {
