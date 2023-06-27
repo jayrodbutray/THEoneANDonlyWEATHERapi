@@ -11,10 +11,13 @@ submitButton.addEventListener('click', function () {
 
   // Store the updated search history back in local storage
   localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-
+  
+  
+  retrieveForecast(city);
     displaySearchHistory();
   });
 
+  
   // Function to display the search history on the page
   function displaySearchHistory() {
     var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
@@ -49,51 +52,11 @@ submitButton.addEventListener('click', function () {
     container.appendChild(cityElement);
   
     fetchWeatherDataCombined(city);
+ 
   }
 
   // Call the displaySearchHistory function on page load
   displaySearchHistory();
-
-
-
-
-
-
-
-  function fetchWeatherData(city) {
-    var apiKey = 'e0948e49398ecf759c545ec952d5f846';
-    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}`;
-
-    fetch(apiUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Unable to fetch weather data.');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Process the weather data
-        console.log('Weather data:', data);
-        console.log(data);
-
-        // Example: Extract temperature and description
-        var temperature = data.main.temp;
-        var humidity = data.main.humidity;
-        var wind_speed = data.wind.speed;
-
-        // Example: Display the temperature and description in the UI
-        var temperatureElement = document.getElementById('temperature');
-        var humidityElement = document.getElementById('humidity');
-        var wind_speed = document.getElementById('wind_speed');
-        temperatureElement.textContent = temperature;
-        humidityElement.textContent = humidity;
-        wind_speedElement.textContent = wind_speed;
-      })
-      .catch(error => {
-        console.log('Error fetching weather data:', error);
-      });
-  }
-
 
 
 
@@ -138,7 +101,7 @@ submitButton.addEventListener('click', function () {
     dateEl.innerHTML = days[day] + ', ' + date + ' ' + months[month];
 
   }, 1000);
-
+  
 
   function fetchWeatherDataCombined(city) {
     var apiKey = 'e0948e49398ecf759c545ec952d5f846';
@@ -240,3 +203,39 @@ submitButton.addEventListener('click', function () {
         console.error('Error fetching weather data:', error);
       });
     }
+
+
+    //OLD CODE
+    /* function fetchWeatherData(city) {
+    var apiKey = 'e0948e49398ecf759c545ec952d5f846';
+    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}`;
+
+    fetch(apiUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Unable to fetch weather data.');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Process the weather data
+        console.log('Weather data:', data);
+        console.log(data);
+
+        // Example: Extract temperature and description
+        var temperature = data.main.temp;
+        var humidity = data.main.humidity;
+        var wind_speed = data.wind.speed;
+
+        // Example: Display the temperature and description in the UI
+        var temperatureElement = document.getElementById('temperature');
+        var humidityElement = document.getElementById('humidity');
+        var wind_speed = document.getElementById('wind_speed');
+        temperatureElement.textContent = temperature;
+        humidityElement.textContent = humidity;
+        wind_speedElement.textContent = wind_speed;
+      })
+      .catch(error => {
+        console.log('Error fetching weather data:', error);
+      });
+}*/
