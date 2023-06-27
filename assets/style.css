@@ -59,9 +59,9 @@ font-size: 70px;
 
 .weatheritem{
   display: flex;
-  flex-direction: column;
   background: rgba(24,24,27,0.6);
   padding: 20px;
+  flex-direction: column;
   border-radius: 10px;
   margin: 10px 0;
   border: 2px solid whitesmoke;
@@ -71,11 +71,10 @@ font-size: 70px;
 .future-forecast{
   background: rgba(24,24,27,0.8);
   padding: 25px;
-  bottom: 0;
   display: flex;
-  color: white;
+  color: blue;
   width: 100%;
-  
+  align-items: center;
 }
 
 .future-forecast .today {
